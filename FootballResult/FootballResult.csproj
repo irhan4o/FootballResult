@@ -25,4 +25,8 @@
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
 </Project>

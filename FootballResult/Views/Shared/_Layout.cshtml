@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using FootballResult.Models.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+@RenderSection("Styles", required: false)
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,6 +46,24 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Stats_Teams" asp-action="Index">Stats_Teams</a>
                         </li>
                     </ul>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+
+                    <partial name="_LoginPartial" />
+                }
+                else{
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" style="text-decoration:none;">
+                            <img src="@user?.ProfilePicture"
+                                 class="profile-image"
+                                 alt="No profile image yet"
+                                 style="width:48px; height:48px; border-radius:50%; border:2px solid #0d6efd; object-fit:cover;" />
+                 
+                        </a>
+                    
+                }
+                   
+                    </nav>
+
                 </div>
             </div>
         </nav>

@@ -7,7 +7,7 @@ namespace FootballResult.Models.Data
     {
         [Key]
         public int? Pk { get; set; }
-        public string IdentificationNumber { get; set; } = null!;
+        public string? IdentificationNumber { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 

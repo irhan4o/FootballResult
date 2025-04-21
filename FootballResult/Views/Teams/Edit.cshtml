@@ -1,54 +1,111 @@
 ﻿@model FootballResult.Models.Data.Team
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Team";
 }
 
-<h1>Edit</h1>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-6 fw-bold text-primary">✏️ Edit Team</h1>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
 
-<h4>Team</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="NameFirstTeam" class="control-label"></label>
-                <input asp-for="NameFirstTeam" class="form-control" />
-                <span asp-validation-for="NameFirstTeam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameSecoundTeam" class="control-label"></label>
-                <input asp-for="NameSecoundTeam" class="form-control" />
-                <span asp-validation-for="NameSecoundTeam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PictureFirst" class="control-label"></label>
-                <input asp-for="PictureFirst" class="form-control" />
-                <span asp-validation-for="PictureFirst" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PictureSecound" class="control-label"></label>
-                <input asp-for="PictureSecound" class="form-control" />
-                <span asp-validation-for="PictureSecound" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h5 class="card-title mb-0">Edit Team Details</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data" class="row g-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="NameFirstTeam" class="form-label fw-bold">First Team Name</label>
+                        <input asp-for="NameFirstTeam" class="form-control form-control-lg" placeholder="Enter first team name" />
+                        <span asp-validation-for="NameFirstTeam" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="NameSecoundTeam" class="form-label fw-bold">Second Team Name</label>
+                        <input asp-for="NameSecoundTeam" class="form-control form-control-lg" placeholder="Enter second team name" />
+                        <span asp-validation-for="NameSecoundTeam" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label fw-bold d-block">Current First Team Image</label>
+                        @if (!string.IsNullOrEmpty(Model.PictureFirst))
+                        {
+                            <img src="@Model.PictureFirst" class="img-thumbnail mb-2" style="max-height: 150px" alt="Current first team image" />
+                        }
+                        <label asp-for="PictureFirst" class="form-label fw-bold">Update First Team Image</label>
+                        <input type="file" name="PictureFirst" class="form-control" accept="image/*" />
+                        <span asp-validation-for="PictureFirst" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label fw-bold d-block">Current Second Team Image</label>
+                        @if (!string.IsNullOrEmpty(Model.PictureSecound))
+                        {
+                            <img src="@Model.PictureSecound" class="img-thumbnail mb-2" style="max-height: 150px" alt="Current second team image" />
+                        }
+                        <label asp-for="PictureSecound" class="form-label fw-bold">Update Second Team Image</label>
+                        <input type="file" name="PictureSecound" class="form-control" accept="image/*" />
+                        <span asp-validation-for="PictureSecound" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Description" class="form-label fw-bold">Match Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter match description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-save me-2"></i>Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Styles {
+    <style>
+        .form-control {
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus {
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                border-color: #0d6efd;
+            }
+
+        .card {
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(45deg, #0d6efd, #0043a8);
+        }
+    </style>
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
