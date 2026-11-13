@@ -1,18 +1,10 @@
 # FootballResult
 
-Уеб приложение за управление на футболни резултати и мачове.
+A simple web application for managing football matches and results.
 
-## Технологии
-
-- ASP.NET Core 8
-- Entity Framework Core
-- SQLite / SQL Server
-
-## Стартиране
+## Run
 
 ```bash
 dotnet restore
 dotnet run --project FootballResult/FootballResult.csproj
 ```
-
-След стартиране отворете адреса, показан в конзолата.
